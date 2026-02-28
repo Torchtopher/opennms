@@ -103,7 +103,16 @@ const loadChartData = function(graph) {
 					.select('.c3-chart')
 					.append('svg:title')
 					.text(description);
-			}
+			}	
+			var width = $('#' + graph.id).find(".c3-chart").get(0).getBBox().width; //to get g group of svg chart
+			var partialHeight = $('#' + graph.id).find(".c3-chart").get(0).getBBox().height; //to get g group of svg chart
+			chart.legend.hide();
+			var totalHeight = $('#' + graph.id).find(".c3-chart").get(0).getBBox().height; //to get g group of svg chart
+			var newHeight = totalHeight + (totalHeight - partialHeight);
+			setTimeout(() => {
+				chart.resize({ 'height': newHeight, 'width': width });
+				chart.legend.show();
+			},100);
 		}
 		}
 	});
